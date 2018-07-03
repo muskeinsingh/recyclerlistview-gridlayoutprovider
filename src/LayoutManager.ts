@@ -6,8 +6,8 @@ import {
   Dimension,
   LayoutProvider,
   GridLayoutProvider,
-} from "../dependencies/LayoutProvider";
-import CustomError from "../exceptions/CustomError";
+} from "./LayoutProvider";
+import CustomError from "./CustomError";
 
 export abstract class LayoutManager {
   public getOffsetForIndex(index: number): Point {

@@ -3,8 +3,8 @@ import {
   WrapGridLayoutManager,
   LayoutManager,
   GridLayoutManager,
-} from "../layoutmanager/LayoutManager";
-import CustomError from "../exceptions/CustomError";
+} from "./LayoutManager";
+import CustomError from "./CustomError";
 
 /**
  * Created by talha.naqvi on 05/04/17.
