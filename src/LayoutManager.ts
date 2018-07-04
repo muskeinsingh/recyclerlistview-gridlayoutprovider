@@ -240,7 +240,7 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     layoutProvider: GridLayoutProvider,
     renderWindowSize: Dimension,
     getSpanForIndex: (index: number) => number,
-    maxSpan: () => number,
+    maxSpan: number,
     isHorizontal?: boolean,
     cachedLayouts?: Layout[],
   ) {
@@ -248,13 +248,13 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     this._getSpanForIndex = getSpanForIndex;
     this._isGridHorizontal = isHorizontal;
     this._renderWindowSize = renderWindowSize;
-    if (maxSpan() === 0 || maxSpan() === undefined) {
+    if (maxSpan === 0) {
       throw new CustomError({
         message: "Max Column Span cannot be 0 or undefined",
         type: "NotSupportedException",
       });
     } else {
-      this._maxSpan = maxSpan();
+      this._maxSpan = maxSpan;
     }
   }
 

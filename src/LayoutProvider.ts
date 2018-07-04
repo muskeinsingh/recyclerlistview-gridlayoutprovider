@@ -168,7 +168,7 @@ export class GridLayoutProvider extends LayoutProvider {
       this,
       renderWindowSize,
       this.getSpanForIndex,
-      this.setMaxSpan,
+      this.setMaxSpan(),
       this._isHorizontal,
       cachedLayouts,
     );
