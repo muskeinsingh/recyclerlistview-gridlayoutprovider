@@ -1,6 +1,6 @@
 {
   "name": "recyclerlistview-gridlayoutmanager",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Grid Layout Manager built on top of RecyclerListView!",
   "main": "dist/reactnative/index.js",
   "types": "dist/reactnative/index.d.ts",
@@ -34,18 +34,7 @@
     "url": "https://github.com/muskeinsingh/recyclerlistview-gridlayoutmanager/issues"
   },
   "homepage": "https://github.com/muskeinsingh/recyclerlistview-gridlayoutmanager",
-  "dependencies": {
-    "lodash.debounce": "4.0.8",
-    "prop-types": "15.5.8",
-    "ts-object-utils": "0.0.5"
-  },
   "peerDependencies": {
-    "react": ">= 15.2.1",
-    "react-native": ">= 0.30.0"
-  },
-  "devDependencies": {
-    "@types/lodash.debounce": "4.0.3",
-    "@types/prop-types": "15.5.2",
-    "@types/react-native": "0.49.5"
+    "recyclerlistview": ">= 1.4.0"
   }
 }
