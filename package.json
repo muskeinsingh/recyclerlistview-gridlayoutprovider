@@ -1,9 +1,9 @@
 {
   "name": "recyclerlistview-gridlayoutmanager",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Grid Layout Manager built on top of RecyclerListView!",
-  "main": "dist/reactnative/index.js",
-  "types": "dist/reactnative/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "sh scripts/build.sh",
     "clean": "sh scripts/clean.sh",
