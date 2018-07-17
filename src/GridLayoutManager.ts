@@ -2,34 +2,34 @@ import {
   Dimension,
   Layout,
   WrapGridLayoutManager,
+  LayoutProvider,
 } from "recyclerlistview";
-import GridLayoutProvider from "./GridLayoutProvider";
-export default class GridLayoutManager extends WrapGridLayoutManager {
+export class GridLayoutManager extends WrapGridLayoutManager {
   private _maxSpan: number;
-  private _getSpanForIndex: (index: number) => number;
+  private _getSpan: (index: number) => number;
   private _isGridHorizontal: boolean | undefined;
   private _renderWindowSize: Dimension;
   constructor(
-    layoutProvider: GridLayoutProvider,
+    layoutProvider: LayoutProvider,
     renderWindowSize: Dimension,
-    getSpanForIndex: (index: number) => number,
+    getSpan: (index: number) => number,
     maxSpan: number,
     isHorizontal?: boolean,
     cachedLayouts?: Layout[],
   ) {
     super(layoutProvider, renderWindowSize, isHorizontal, cachedLayouts);
-    this._getSpanForIndex = getSpanForIndex;
+    this._getSpan = getSpan;
     this._isGridHorizontal = isHorizontal;
     this._renderWindowSize = renderWindowSize;
-    if (maxSpan === 0) {
-      throw new Error("Max Column Span cannot be 0 or undefined");
+    if (maxSpan <= 0) {
+      throw new Error("Max Column Span cannot be less than or equal to 0");
     } else {
       this._maxSpan = maxSpan;
     }
   }
 
   public getStyleOverridesForIndex(index: number): object | undefined {
-    const columnSpanForIndex = this._getSpanForIndex(index);
+    const columnSpanForIndex = this._getSpan(index);
     return this._isGridHorizontal
       ? {
           height:

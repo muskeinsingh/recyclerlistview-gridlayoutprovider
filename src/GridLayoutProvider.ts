@@ -1,74 +1,55 @@
 
-import {Dimension, Layout, LayoutProvider, LayoutManager} from "recyclerlistview";
-import GridLayoutManager from "./GridLayoutManager";
-export default class GridLayoutProvider extends LayoutProvider {
-  private _getDimensionForIndex: (index: number) => number;
-  private _getSpanForIndex: (index: number) => number;
-  private _setMaxSpan: () => number;
-  private _renderWindowSize: Dimension | undefined;
-  private _isHorizontal: boolean | undefined;
+import { Dimension, Layout, LayoutProvider, LayoutManager } from "recyclerlistview";
+import { GridLayoutManager } from "./GridLayoutManager";
+
+export class GridLayoutProvider extends LayoutProvider {
+  private _getHeightOrWidth: (index: number) => number;
+  private _getSpan: (index: number) => number;
+  private _maxSpan: number;
+  private _renderWindowSize?: Dimension;
+  private _isHorizontal?: boolean;
+
   constructor(
-    getLayoutTypeForIndex: (index: number) => string | number,
-    getDimensionForIndex: (index: number) => number,
-    getSpanForIndex: (index: number) => number,
-    setMaxSpan: () => number,
+    maxSpan: number,
+    getLayoutType: (index: number) => string | number,
+    getSpan: (index: number) => number,
+    // If horizonal return width while spans will be rowspans. Opposite holds true if not horizontal
+    getHeightOrWidth: (index: number) => number,
   ) {
     super(
-      getLayoutTypeForIndex,
+      getLayoutType,
       (type: string | number, dimension: Dimension, index: number) => {
-        this.setLayoutForTypeGrid(dimension, index);
+        this.setLayout(dimension, index);
       },
     );
-    this._getDimensionForIndex = getDimensionForIndex;
-    this._getSpanForIndex = getSpanForIndex;
-    this._setMaxSpan = setMaxSpan;
+    this._getHeightOrWidth = getHeightOrWidth;
+    this._getSpan = getSpan;
+    this._maxSpan = maxSpan;
   }
 
-  public setLayoutForTypeGrid(dimension: Dimension, index: number): void {
-    const maxSpan: number = this.setMaxSpan();
-    const itemSpan: number = this.getSpanForIndex(index);
+  public newLayoutManager(renderWindowSize: Dimension, isHorizontal?: boolean, cachedLayouts?: Layout[]): LayoutManager {
+    this._isHorizontal = isHorizontal;
+    this._renderWindowSize = renderWindowSize;
+    return new GridLayoutManager(this, renderWindowSize, this._getSpan, this._maxSpan, this._isHorizontal, cachedLayouts);
+  }
+
+  private setLayout(dimension: Dimension, index: number): void {
+    const maxSpan: number = this._maxSpan;
+    const itemSpan: number = this._getSpan(index);
     if (itemSpan > maxSpan) {
       throw new Error("Item span for index " + index + " is more than the max span");
     }
-    if (this._isHorizontal) {
-      dimension.width = this.getDimensionForIndex(index);
-      if (this._renderWindowSize) {
+    if (this._renderWindowSize) {
+      if (this._isHorizontal) {
+        dimension.width = this._getHeightOrWidth(index);
         dimension.height = (this._renderWindowSize.height / maxSpan) * itemSpan;
-      }
-    } else {
-      dimension.height = this.getDimensionForIndex(index);
-      if (this._renderWindowSize) {
+
+      } else {
+        dimension.height = this._getHeightOrWidth(index);
         dimension.width = (this._renderWindowSize.width / maxSpan) * itemSpan;
       }
+    } else {
+      throw new Error("setLayout called before layoutmanager was created, cannot be handled");
     }
-  }
-
-  public newLayoutManager(
-    renderWindowSize: Dimension,
-    isHorizontal?: boolean,
-    cachedLayouts?: Layout[],
-  ): LayoutManager {
-    this._isHorizontal = isHorizontal;
-    this._renderWindowSize = renderWindowSize;
-    return new GridLayoutManager(
-      this,
-      renderWindowSize,
-      this.getSpanForIndex,
-      this.setMaxSpan(),
-      this._isHorizontal,
-      cachedLayouts,
-    );
-  }
-
-  public setMaxSpan(): number {
-    return this._setMaxSpan();
-  }
-
-  public getSpanForIndex(index: number): number {
-    return this._getSpanForIndex(index);
-  }
-
-  public getDimensionForIndex(index: number): number {
-    return this._getDimensionForIndex(index);
   }
 }

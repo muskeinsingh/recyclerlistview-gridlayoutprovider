@@ -1,5 +1,5 @@
-import GridLayoutProvider from "./GridLayoutProvider";
-import GridLayoutManager from "./GridLayoutManager";
+import { GridLayoutProvider } from "./GridLayoutProvider";
+import { GridLayoutManager } from "./GridLayoutManager";
 
 export {
     GridLayoutProvider,
