@@ -1,7 +1,7 @@
 {
   "name": "recyclerlistview-gridlayoutprovider",
   "version": "1.0.5",
-  "description": "Grid Layout Manager built on top of RecyclerListView!",
+  "description": "Grid Layout Provider built on top of RecyclerListView!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
