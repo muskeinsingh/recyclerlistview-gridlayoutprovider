@@ -1,7 +1,7 @@
 {
-  "name": "recyclerlistview-gridlayoutmanager",
-  "version": "1.0.4",
-  "description": "Grid Layout Manager built on top of RecyclerListView!",
+  "name": "recyclerlistview-gridlayoutprovider",
+  "version": "1.0.5",
+  "description": "Grid Layout Provider built on top of RecyclerListView!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -34,7 +34,10 @@
     "url": "https://github.com/muskeinsingh/recyclerlistview-gridlayoutmanager/issues"
   },
   "homepage": "https://github.com/muskeinsingh/recyclerlistview-gridlayoutmanager",
+  "devDependencies": {
+    "recyclerlistview": "^1.4.0-beta.6"
+  },
   "peerDependencies": {
-    "recyclerlistview": ">= 1.4.0"
+    "recyclerlistview": ">=1.4.0"
   }
 }
