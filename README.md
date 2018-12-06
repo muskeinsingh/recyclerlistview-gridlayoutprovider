@@ -27,5 +27,5 @@ Please raise issues [here](https://github.com/muskeinsingh/recyclerlistview-grid
 
 **Contributors**
 
-[Muskein Singh](https://twitter.com/muskein) and [Naqvi Talha](https://twitter.com/naqvitalha)
+[Muskein Singh](https://twitter.com/muskein) and [Talha Naqvi](https://twitter.com/naqvitalha)
 
