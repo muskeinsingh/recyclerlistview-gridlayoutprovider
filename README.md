@@ -3,7 +3,7 @@
 [![travis](https://travis-ci.org/muskeinsingh/recyclerlistview-gridlayoutprovider.svg?branch=master)](https://travis-ci.org/muskeinsingh/recyclerlistview-gridlayoutprovider)
 [![License](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Grid Layout Provider built on top of [RecyclerListView!](https://github.com/Flipkart/recyclerlistview). Works beautifully on Android, iOS and web. 
+Grid Layout Provider built on top of [RecyclerListView!](https://github.com/Flipkart/recyclerlistview). Works beautifully on Android, iOS and web. Compatible with recyclerlistview version greater than 1.4.0-beta.6.
 
 **Why use GridLayoutProvider?**
 
@@ -28,4 +28,8 @@ Please raise issues [here](https://github.com/muskeinsingh/recyclerlistview-grid
 **Contributors**
 
 [Muskein Singh](https://twitter.com/muskein) and [Talha Naqvi](https://twitter.com/naqvitalha)
+
+**Contact Us**
+
+Email us at cross-platform@flipkart.com in case of any queries
 
