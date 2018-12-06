@@ -7,7 +7,11 @@ Grid Layout Provider built on top of [RecyclerListView!](https://github.com/Flip
 
 **Why use GridLayoutProvider?**
 
-In cases where you are rendering a list of grids - you would have to explicitly calculate and tell the width/height of each cell. Grid Layout Provider minimises that effort for the users as it calculates the width/height based on the spans each index/type wants to consume. Tell us the type of each cell, max span that any cell can achieve and the span for each cell - we will calculate the width (in case of vertical list)/height (in case of horizontal list) for you. Do checkout our sample code to understand more. 
+In cases where you are rendering a list of grids - you would have to explicitly calculate and tell the width/height of each cell. Grid Layout Provider minimises that effort for the users as it calculates the width/height based on the spans each index/type wants to consume. Tell us the type of each cell, max span that any cell can achieve and the span for each cell - we will calculate the width (in case of vertical list)/height (in case of horizontal list) for you. Do checkout our sample code to understand more.
+
+**GIF**
+
+![](https://j.gifs.com/ZV3qNv.gif)
 
 **API**
 
