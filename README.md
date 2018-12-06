@@ -5,4 +5,4 @@
 
 Grid Layout Provider built on top of [RecyclerListView!](https://github.com/Flipkart/recyclerlistview)
 
-[Sample code](https://snack.expo.io/rkaKxVWQ7)
+[Sample code](https://snack.expo.io/rybd0OUkE)
