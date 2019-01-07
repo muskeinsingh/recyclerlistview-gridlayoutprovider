@@ -29,10 +29,10 @@ export class GridLayoutManager extends WrapGridLayoutManager {
   }
 
   public overrideLayout(index: number, dim: Dimension): void {
-    // we are doing this in case when we provide decimal dimensions for a
-    // certain cell and the onlayout returns a different dimension.
-    // This causes the layouting to behave weirdly.
-    // So, whenever we have layouts for a certain index, we explicitly override the dimension to those very layout values 
+    // we are doing this because - when we provide decimal dimensions for a
+    // certain cell - the onlayout returns a different dimension in certain high end devices.
+    // This causes the layouting to behave weirdly as the new dimension might not adhere to the spans and the cells arrange themselves differently
+    // So, whenever we have layouts for a certain index, we explicitly override the dimension to those very layout values
     // and call super so as to set the overridden flag as true
     const layout = this.getLayouts()[index];
     if (layout) {
