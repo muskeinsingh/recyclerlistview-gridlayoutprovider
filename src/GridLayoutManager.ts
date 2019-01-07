@@ -28,6 +28,18 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     }
   }
 
+  public overrideLayout(index: number, dim: Dimension): void {
+    const layout = this.getLayouts()[index];
+    if (layout) {
+      if (this._isGridHorizontal) {
+        dim.height = layout.height;
+      } else {
+        dim.width = layout.width;
+      }
+    }
+    super.overrideLayout(index, dim);
+  }
+
   public getStyleOverridesForIndex(index: number): object | undefined {
     const columnSpanForIndex = this._getSpan(index);
     return this._isGridHorizontal
