@@ -28,6 +28,23 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     }
   }
 
+  public overrideLayout(index: number, dim: Dimension): void {
+    // we are doing this because - when we provide decimal dimensions for a
+    // certain cell - the onlayout returns a different dimension in certain high end devices.
+    // This causes the layouting to behave weirdly as the new dimension might not adhere to the spans and the cells arrange themselves differently
+    // So, whenever we have layouts for a certain index, we explicitly override the dimension to those very layout values
+    // and call super so as to set the overridden flag as true
+    const layout = this.getLayouts()[index];
+    if (layout) {
+      if (this._isGridHorizontal) {
+        dim.height = layout.height;
+      } else {
+        dim.width = layout.width;
+      }
+    }
+    super.overrideLayout(index, dim);
+  }
+
   public getStyleOverridesForIndex(index: number): object | undefined {
     const columnSpanForIndex = this._getSpan(index);
     return this._isGridHorizontal
