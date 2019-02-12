@@ -35,11 +35,17 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     // So, whenever we have layouts for a certain index, we explicitly override the dimension to those very layout values
     // and call super so as to set the overridden flag as true
     const layout = this.getLayouts()[index];
+    const heightDiff = Math.abs(dim.height - layout.height);
+    const widthDiff = Math.abs(dim.width - layout.width);
     if (layout) {
       if (this._isGridHorizontal) {
-        dim.height = layout.height;
+        if (heightDiff < 1) {
+          dim.height = layout.height;
+        }
       } else {
-        dim.width = layout.width;
+        if (widthDiff < 1) {
+          dim.width = layout.width;
+        }
       }
     }
     super.overrideLayout(index, dim);
@@ -49,12 +55,12 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     const columnSpanForIndex = this._getSpan(index);
     return this._isGridHorizontal
       ? {
-          height:
-            (this._renderWindowSize.height / this._maxSpan) * columnSpanForIndex,
-        }
+        height:
+          (this._renderWindowSize.height / this._maxSpan) * columnSpanForIndex,
+      }
       : {
-          width:
-            (this._renderWindowSize.width / this._maxSpan) * columnSpanForIndex,
-        };
+        width:
+          (this._renderWindowSize.width / this._maxSpan) * columnSpanForIndex,
+      };
   }
 }
