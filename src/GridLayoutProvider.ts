@@ -15,7 +15,7 @@ export class GridLayoutProvider extends LayoutProvider {
     getSpan: (index: number) => number,
     // If horizonal return width while spans will be rowspans. Opposite holds true if not horizontal
     getHeightOrWidth: (index: number) => number,
-    decimalPrecision?: number
+    decimalPrecision?: number,
   ) {
     super(
       getLayoutType,

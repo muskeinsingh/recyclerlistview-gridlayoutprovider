@@ -17,7 +17,7 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     maxSpan: number,
     decimalPrecision: number,
     isHorizontal?: boolean,
-    cachedLayouts?: Layout[]
+    cachedLayouts?: Layout[],
   ) {
     super(layoutProvider, renderWindowSize, isHorizontal, cachedLayouts);
     this._getSpan = getSpan;
@@ -69,6 +69,6 @@ export class GridLayoutManager extends WrapGridLayoutManager {
   }
 
   private _calculateAcceptableError(decimalPlace: number): number {
-    return (1/(Math.pow(10, decimalPlace)));
+    return (1 / (Math.pow(10, decimalPlace)));
   }
 }
