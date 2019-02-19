@@ -26,7 +26,7 @@ export class GridLayoutProvider extends LayoutProvider {
     this._getHeightOrWidth = getHeightOrWidth;
     this._getSpan = getSpan;
     this._maxSpan = maxSpan;
-    this._acceptableRelayoutDelta = acceptableRelayoutDelta || 1;
+    this._acceptableRelayoutDelta = ((acceptableRelayoutDelta === undefined) || (acceptableRelayoutDelta === null)) ? 1 : acceptableRelayoutDelta;
   }
 
   public newLayoutManager(renderWindowSize: Dimension, isHorizontal?: boolean, cachedLayouts?: Layout[]): LayoutManager {
