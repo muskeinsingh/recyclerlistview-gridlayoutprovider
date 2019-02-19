@@ -9,13 +9,13 @@ export class GridLayoutManager extends WrapGridLayoutManager {
   private _getSpan: (index: number) => number;
   private _isGridHorizontal: boolean | undefined;
   private _renderWindowSize: Dimension;
-  private _decimalPrecision: number;
+  private _acceptableRelayoutDelta: number;
   constructor(
     layoutProvider: LayoutProvider,
     renderWindowSize: Dimension,
     getSpan: (index: number) => number,
     maxSpan: number,
-    decimalPrecision: number,
+    acceptableRelayoutDelta: number,
     isHorizontal?: boolean,
     cachedLayouts?: Layout[],
   ) {
@@ -23,7 +23,7 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     this._getSpan = getSpan;
     this._isGridHorizontal = isHorizontal;
     this._renderWindowSize = renderWindowSize;
-    this._decimalPrecision = decimalPrecision;
+    this._acceptableRelayoutDelta = acceptableRelayoutDelta;
     if (maxSpan <= 0) {
       throw new Error("Max Column Span cannot be less than or equal to 0");
     } else {
@@ -31,7 +31,7 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     }
   }
 
-  public overrideLayout(index: number, dim: Dimension): void {
+  public overrideLayout(index: number, dim: Dimension): boolean {
     // we are doing this because - when we provide decimal dimensions for a
     // certain cell - the onlayout returns a different dimension in certain high end devices.
     // This causes the layouting to behave weirdly as the new dimension might not adhere to the spans and the cells arrange themselves differently
@@ -40,19 +40,24 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     const layout = this.getLayouts()[index];
     const heightDiff = Math.abs(dim.height - layout.height);
     const widthDiff = Math.abs(dim.width - layout.width);
-    const acceptableError = this._calculateAcceptableError(this._decimalPrecision);
     if (layout) {
       if (this._isGridHorizontal) {
-        if (heightDiff < acceptableError) {
+        if (heightDiff < this._acceptableRelayoutDelta) {
+          if (widthDiff === 0) {
+            return false;
+          }
           dim.height = layout.height;
         }
       } else {
-        if (widthDiff < acceptableError) {
+        if (widthDiff < this._acceptableRelayoutDelta) {
+          if (heightDiff === 0) {
+            return false;
+          }
           dim.width = layout.width;
         }
       }
     }
-    super.overrideLayout(index, dim);
+    return super.overrideLayout(index, dim);
   }
 
   public getStyleOverridesForIndex(index: number): object | undefined {
@@ -66,9 +71,5 @@ export class GridLayoutManager extends WrapGridLayoutManager {
         width:
           (this._renderWindowSize.width / this._maxSpan) * columnSpanForIndex,
       };
-  }
-
-  private _calculateAcceptableError(decimalPlace: number): number {
-    return (1 / (Math.pow(10, decimalPlace)));
   }
 }

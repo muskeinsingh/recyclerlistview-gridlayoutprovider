@@ -8,14 +8,14 @@ export class GridLayoutProvider extends LayoutProvider {
   private _maxSpan: number;
   private _renderWindowSize?: Dimension;
   private _isHorizontal?: boolean;
-  private _decimalPrecision: number;
+  private _acceptableRelayoutDelta: number;
   constructor(
     maxSpan: number,
     getLayoutType: (index: number) => string | number,
     getSpan: (index: number) => number,
     // If horizonal return width while spans will be rowspans. Opposite holds true if not horizontal
     getHeightOrWidth: (index: number) => number,
-    decimalPrecision?: number,
+    acceptableRelayoutDelta?: number,
   ) {
     super(
       getLayoutType,
@@ -26,13 +26,13 @@ export class GridLayoutProvider extends LayoutProvider {
     this._getHeightOrWidth = getHeightOrWidth;
     this._getSpan = getSpan;
     this._maxSpan = maxSpan;
-    this._decimalPrecision = decimalPrecision || 0;
+    this._acceptableRelayoutDelta = acceptableRelayoutDelta || 1;
   }
 
   public newLayoutManager(renderWindowSize: Dimension, isHorizontal?: boolean, cachedLayouts?: Layout[]): LayoutManager {
     this._isHorizontal = isHorizontal;
     this._renderWindowSize = renderWindowSize;
-    return new GridLayoutManager(this, renderWindowSize, this._getSpan, this._maxSpan, this._decimalPrecision, this._isHorizontal, cachedLayouts);
+    return new GridLayoutManager(this, renderWindowSize, this._getSpan, this._maxSpan, this._acceptableRelayoutDelta, this._isHorizontal, cachedLayouts);
   }
 
   private setLayout(dimension: Dimension, index: number): void {
