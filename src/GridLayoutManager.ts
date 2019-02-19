@@ -23,7 +23,11 @@ export class GridLayoutManager extends WrapGridLayoutManager {
     this._getSpan = getSpan;
     this._isGridHorizontal = isHorizontal;
     this._renderWindowSize = renderWindowSize;
-    this._acceptableRelayoutDelta = acceptableRelayoutDelta;
+    if (acceptableRelayoutDelta < 0) {
+      throw new Error("acceptableRelayoutDelta cannot be less than 0");
+    } else {
+      this._acceptableRelayoutDelta = acceptableRelayoutDelta;
+    }
     if (maxSpan <= 0) {
       throw new Error("Max Column Span cannot be less than or equal to 0");
     } else {
