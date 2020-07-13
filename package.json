@@ -35,9 +35,9 @@
   },
   "homepage": "https://github.com/muskeinsingh/recyclerlistview-gridlayoutmanager",
   "devDependencies": {
-    "recyclerlistview": "^3.0.1"
+    "recyclerlistview": "^3.0.0"
   },
   "peerDependencies": {
-    "recyclerlistview": "^3.0.1"
+    "recyclerlistview": "^3.0.0"
   }
 }
