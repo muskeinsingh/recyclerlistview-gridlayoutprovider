@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
-    "lib": [
-      "es6",
-      "dom"
-    ], // target Node.js(v6)
-    "module": "commonjs", // export compatibility
-    "target": "es5", // target Node.js(v6)
+    "lib": ["es6", "dom"], // target Node.js(v6)
+    "module": "es6",
+    "target": "es6",
     "moduleResolution": "node", // target Node.js(v6)
     "declaration": true, // generate TypeScript definitions
     "rootDir": "src",
