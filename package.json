@@ -1,6 +1,6 @@
 {
   "name": "recyclerlistview-gridlayoutprovider",
-  "version": "1.0.5",
+  "version": "1.0.5-alpha.1",
   "description": "Grid Layout Provider built on top of RecyclerListView!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,7 +35,9 @@
   },
   "homepage": "https://github.com/muskeinsingh/recyclerlistview-gridlayoutmanager",
   "devDependencies": {
-    "recyclerlistview": "^2.0.0-beta.4"
+    "recyclerlistview": "^2.0.0-beta.4",
+    "tslint": "^6.1.2",
+    "typescript": "3.7.2"
   },
   "peerDependencies": {
     "recyclerlistview": ">=2.0.0-beta.4"

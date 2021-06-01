@@ -32,6 +32,7 @@ export class GridLayoutProvider extends LayoutProvider {
   public newLayoutManager(renderWindowSize: Dimension, isHorizontal?: boolean, cachedLayouts?: Layout[]): LayoutManager {
     this._isHorizontal = isHorizontal;
     this._renderWindowSize = renderWindowSize;
+    console.log({renderWindowSize})
     return new GridLayoutManager(this, renderWindowSize, this._getSpan, this._maxSpan, this._acceptableRelayoutDelta, this._isHorizontal, cachedLayouts);
   }
 
