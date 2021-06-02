@@ -36,7 +36,6 @@
   "homepage": "https://github.com/muskeinsingh/recyclerlistview-gridlayoutmanager",
   "devDependencies": {
     "recyclerlistview": "^2.0.0-beta.4",
-    "tslint": "^6.1.2",
     "typescript": "3.7.2"
   },
   "peerDependencies": {
