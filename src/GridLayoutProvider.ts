@@ -32,7 +32,6 @@ export class GridLayoutProvider extends LayoutProvider {
   public newLayoutManager(renderWindowSize: Dimension, isHorizontal?: boolean, cachedLayouts?: Layout[]): LayoutManager {
     this._isHorizontal = isHorizontal;
     this._renderWindowSize = renderWindowSize;
-    console.log({renderWindowSize})
     return new GridLayoutManager(this, renderWindowSize, this._getSpan, this._maxSpan, this._acceptableRelayoutDelta, this._isHorizontal, cachedLayouts);
   }
 
@@ -44,12 +43,12 @@ export class GridLayoutProvider extends LayoutProvider {
     }
     if (this._renderWindowSize) {
       if (this._isHorizontal) {
-        dimension.width = this._getHeightOrWidth(index);
-        dimension.height = (this._renderWindowSize.height / maxSpan) * itemSpan;
+        dimension.width = +this._getHeightOrWidth(index).toFixed(2);
+        dimension.height = +((this._renderWindowSize.height / maxSpan) * itemSpan).toFixed(2);
 
       } else {
-        dimension.height = this._getHeightOrWidth(index);
-        dimension.width = (this._renderWindowSize.width / maxSpan) * itemSpan;
+        dimension.height = +this._getHeightOrWidth(index).toFixed(2);
+        dimension.width = +((this._renderWindowSize.width / maxSpan) * itemSpan).toFixed(2);
       }
     } else {
       throw new Error("setLayout called before layoutmanager was created, cannot be handled");
