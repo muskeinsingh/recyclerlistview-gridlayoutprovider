@@ -67,13 +67,15 @@ export class GridLayoutProvider extends LayoutProvider {
         const itemDim = this._renderWindowSize.height / maxSpan;
         dimension.width = +this._getHeightOrWidth(index).toFixed(2);
         dimension.height = parseInt(
-          (itemDim * itemSpan).toString().split(".")[0]
+          (itemDim * itemSpan).toString().split(".")[0],
+          10
         );
       } else {
         const itemDim = this._renderWindowSize.width / maxSpan;
         dimension.height = +this._getHeightOrWidth(index).toFixed(2);
         dimension.width = parseInt(
-          (itemDim * itemSpan).toString().split(".")[0]
+          (itemDim * itemSpan).toString().split(".")[0],
+          10
         );
       }
       // tslint:disable-next-line:no-console
