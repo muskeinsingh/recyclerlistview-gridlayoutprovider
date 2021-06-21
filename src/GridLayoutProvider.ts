@@ -22,7 +22,7 @@ export class GridLayoutProvider extends LayoutProvider {
     super(
       getLayoutType,
       (_: string | number, dimension: Dimension, index: number) => {
-        isPreciseLayout ? this.setPreciseLayout(dimension, index) : this.setLayout(dimension, index);
+        this.setLayout(dimension, index, isPreciseLayout);
       },
     );
     this._getHeightOrWidth = getHeightOrWidth;
@@ -37,7 +37,7 @@ export class GridLayoutProvider extends LayoutProvider {
     return new GridLayoutManager(this, renderWindowSize, this._getSpan, this._maxSpan, this._acceptableRelayoutDelta, this._isHorizontal, cachedLayouts);
   }
 
-  private setLayout(dimension: Dimension, index: number): void {
+  private setLayout(dimension: Dimension, index: number, isPreciseLayout?: boolean): void {
     const maxSpan: number = this._maxSpan;
     const itemSpan: number = this._getSpan(index);
     if (itemSpan > maxSpan) {
@@ -45,35 +45,20 @@ export class GridLayoutProvider extends LayoutProvider {
     }
     if (this._renderWindowSize) {
       if (this._isHorizontal) {
-        dimension.width = this._getHeightOrWidth(index);
-        dimension.height = (this._renderWindowSize.height / maxSpan) * itemSpan;
-
+        const dimensionHeight = (this._renderWindowSize.height / maxSpan) * itemSpan;
+        dimension.width = this._preciseDimensionValue(this._getHeightOrWidth(index), isPreciseLayout);
+        dimension.height = this._preciseDimensionValue(dimensionHeight, isPreciseLayout);
       } else {
-        dimension.height = this._getHeightOrWidth(index);
-        dimension.width = (this._renderWindowSize.width / maxSpan) * itemSpan;
+        const dimensionWidth = (this._renderWindowSize.width / maxSpan) * itemSpan
+        dimension.height = this._preciseDimensionValue(this._getHeightOrWidth(index), isPreciseLayout);
+        dimension.width = this._preciseDimensionValue(dimensionWidth, isPreciseLayout);
       }
     } else {
       throw new Error("setLayout called before layoutmanager was created, cannot be handled");
     }
   }
 
-  private setPreciseLayout(dimension: Dimension, index: number): void {
-    const maxSpan: number = this._maxSpan;
-    const itemSpan: number = this._getSpan(index);
-    if (itemSpan > maxSpan) {
-      throw new Error("Item span for index " + index + " is more than the max span");
-    }
-    if (this._renderWindowSize) {
-      if (this._isHorizontal) {
-        dimension.width = +(this._getHeightOrWidth(index).toFixed(2));
-        dimension.height = +(((this._renderWindowSize.height / maxSpan) * itemSpan).toFixed(2));
-
-      } else {
-        dimension.height = +(this._getHeightOrWidth(index).toFixed(2));
-        dimension.width = +(((this._renderWindowSize.width / maxSpan) * itemSpan).toFixed(2));
-      }
-    } else {
-      throw new Error("setLayout called before layoutmanager was created, cannot be handled");
-    }
+  private _preciseDimensionValue(value: number, isPreciseRequired?: boolean): number {
+    return isPreciseRequired ? +value.toFixed(2) : value;
   }
 }
