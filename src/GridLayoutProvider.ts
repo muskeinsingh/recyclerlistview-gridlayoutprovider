@@ -49,7 +49,7 @@ export class GridLayoutProvider extends LayoutProvider {
       if (this._isHorizontal) {
         const dimensionHeight = (this._renderWindowSize.height / maxSpan) * itemSpan;
         dimension.width = this._preciseDimensionValue(this._getHeightOrWidth(index));
-        dimension.height = this._preciseIntDimensionValue(dimensionHeight);       
+        dimension.height = this._preciseIntDimensionValue(dimensionHeight);
       } else {
         const dimensionWidth = (this._renderWindowSize.width / maxSpan) * itemSpan;
         dimension.height = this._preciseDimensionValue(this._getHeightOrWidth(index));
