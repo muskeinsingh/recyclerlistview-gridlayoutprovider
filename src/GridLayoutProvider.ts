@@ -49,11 +49,11 @@ export class GridLayoutProvider extends LayoutProvider {
       if (this._isHorizontal) {
         const dimensionHeight = (this._renderWindowSize.height / maxSpan) * itemSpan;
         dimension.width = this._preciseDimensionValue(this._getHeightOrWidth(index));
-        dimension.height = this._preciseDimensionValue(dimensionHeight);
+        dimension.height = this._preciseIntDimensionValue(dimensionHeight);       
       } else {
-        const dimensionWidth = (this._renderWindowSize.width / maxSpan) * itemSpan
+        const dimensionWidth = (this._renderWindowSize.width / maxSpan) * itemSpan;
         dimension.height = this._preciseDimensionValue(this._getHeightOrWidth(index));
-        dimension.width = this._preciseDimensionValue(dimensionWidth);
+        dimension.width = this._preciseIntDimensionValue(dimensionWidth);
       }
     } else {
       throw new Error("setLayout called before layoutmanager was created, cannot be handled");
@@ -62,5 +62,9 @@ export class GridLayoutProvider extends LayoutProvider {
 
   private _preciseDimensionValue(value: number): number {
     return this._isPreciseLayout ? +value.toFixed(2) : value;
+  }
+
+  private _preciseIntDimensionValue(value : number) : number {
+    return this._isPreciseLayout ? parseInt(value.toString().split(".")[0],10) : value;
   }
 }
